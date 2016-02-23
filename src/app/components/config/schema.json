@@ -1,0 +1,67 @@
+{
+  "type": "object",
+  "properties": {
+    "couchdbUrl": {
+      "title": "Public CouchDB URL",
+      "type": "url"
+    },
+    "couchdbPassword": {
+      "title": "CouchDB admin password",
+      "type": "string"
+    },
+    "couchdbAdmin": {
+      "title": "CouchDB admin user",
+      "type": "string",
+      "default": "admin"
+    },
+    "sshConfig": {
+      "title": "OpenSSH config",
+      "type": "string",
+      "default": ""
+    },
+    "sshKnownHosts": {
+      "title": "OpenSSH known hosts",
+      "type": "string",
+      "default": ""
+    },
+    "webdavUrl": {
+      "title": "WebDAV URL",
+      "type": "url"
+    },
+    "webdavUser": {
+      "title": "WebDAV user",
+      "type": "string"
+    },
+    "webdavPassword": {
+      "title": "WebDAV password",
+      "type": "string"
+    },
+    "xenonHosts": {
+      "title": "Xenon hosts",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "title": "Path of run script",
+            "type": "string"
+          },
+          "script": {
+            "title": "Run script",
+            "type": "string"
+          },
+          "host": {
+            "title": "Host (including scheme)",
+            "type": "url"
+          },
+          "maxTime": {
+            "title": "Maximum job time (minutes)",
+            "type": "number",
+            "minimum": 1,
+            "default": 1440
+          }
+        }
+      }
+    }
+  }
+}

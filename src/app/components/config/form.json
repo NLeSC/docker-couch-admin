@@ -1,0 +1,11 @@
+[
+  {
+    "name": "couchdbPassword",
+    "type": "password"
+  },
+  "*",
+  {
+    "type": "submit",
+    "title": "OK"
+  }
+]
