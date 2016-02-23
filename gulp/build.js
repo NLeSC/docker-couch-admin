@@ -69,6 +69,11 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe($.size({ title: path.join(conf.paths.dist, '/'), showFiles: true }));
   });
 
+gulp.task('couchapp', function() {
+  return gulp.src(path.join(conf.paths.couchapp, '**'))
+    .pipe(gulp.dest(path.join(conf.paths.distBase, "/")));
+});
+
 // Only applies for fonts from bower dependencies
 // Custom fonts are handled by the "other" task
 gulp.task('fonts', function () {
@@ -95,4 +100,4 @@ gulp.task('clean', function () {
   return $.del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/')]);
 });
 
-gulp.task('build', ['html', 'fonts', 'other']);
+gulp.task('build', ['couchapp', 'html', 'fonts', 'other']);
