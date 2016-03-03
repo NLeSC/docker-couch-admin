@@ -1,0 +1,9 @@
+.git
+.idea
+.tmp
+bower_components
+node_modules
+e2e
+gulp
+src
+
