@@ -24,8 +24,13 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div ng-viewport ng-controller="RouterController"></div>
+    <div class="container">
+    <div>
+      <acme-navbar></acme-navbar><login-status>
+    </div>
 
+    <div ng-viewport ng-controller="RouterController"></div>
+    </div>
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->
     <!-- run `gulp inject` to automatically populate bower script dependencies -->

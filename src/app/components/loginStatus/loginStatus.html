@@ -1,0 +1,12 @@
+<div ng-switch="vm.couch.loggedIn">
+<p ng-switch-when="yes">Logged in as <span ng-bind="vm.username"></span>. <a ng-click="vm.logout()" ng-link="/login">Log out</a></p>
+<form ng-switch-default>
+  <label for="name">Username:</label><input ng-model="vm.username" name="username" type="text" minlength="1"></input>
+  <label for="password">Password:</label><input ng-model="vm.password" name="password" type="password"  minlength="1"></input>
+  <div ng-switch="vm.hasAdmins">
+    <button disabled ng-switch-when="unknown">Loading...</button>
+    <button ng-switch-when="yes" ng-click="vm.login()" type="submit">Log in</button>
+    <button ng-switch-default ng-click="vm.createAndLogin()" type="submit">Create user and login</button>
+  </div>
+</form>
+</div>
