@@ -17,6 +17,8 @@
     vm.getUsername = getUsername;
     vm.isLoggedIn = isLoggedIn;
     vm.reset = reset;
+    vm.bulkGet = bulkGet;
+    vm.bulkPut = bulkPut;
 
     updateSession();
 
@@ -39,6 +41,13 @@
 
     function logout() {
       return vm.db.logout().then(vm.reset);
+    }
+
+    function bulkPut(docs) {
+      return vm.db.bulkDocs(docs);
+    }
+    function bulkGet(ids) {
+      return vm.db.allDocs({keys: ids, include_docs: true});
     }
 
     function reset() {

@@ -3,7 +3,7 @@
 
   angular
     .module('simCityAdmin')
-    .directive('loginStatus', userLogin);
+    .directive('cfLoginStatus', userLogin);
 
   /** @ngInject */
   function userLogin() {
