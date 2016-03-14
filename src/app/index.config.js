@@ -3,7 +3,7 @@
 
   angular
     .module('simCityAdmin')
-    .constant('couchdbHost', 'http://192.168.99.100:5984')
+    .constant('couchdbDatabase', 'configuration')
     .config(logConfig)
     .config(pouchDBConfig);
 

@@ -21,7 +21,7 @@
     return directive;
 
     /** @ngInject */
-    function LoginDirectiveController(CouchService, CouchAdminService, $location) {
+    function LoginDirectiveController(CouchService, CouchAdminService, $location, couchdbDatabase) {
       var vm = this;
 
       // "vm.creation" is avaible by directive option "bindToController: true"

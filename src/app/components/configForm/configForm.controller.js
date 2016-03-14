@@ -49,10 +49,6 @@
             docs.push(doc);
           }
         });
-        console.log(docs);
-        console.log(vm.metadata);
-        console.log(vm.model);
-        console.log(vm.originalData);
         return CouchService.bulkPut(docs)
           .then(function(response) {
             var faulty = [];

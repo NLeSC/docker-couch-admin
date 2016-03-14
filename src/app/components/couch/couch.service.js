@@ -6,10 +6,10 @@
     .service('CouchService', CouchService);
 
   /** @ngInject */
-  function CouchService(pouchDB, $q, $log, couchdbHost, $location) {
+  function CouchService(pouchDB, $q, $log, $location, couchdbDatabase) {
     var vm = this;
 
-    vm.db = pouchDB(couchdbHost + '/configurator');
+    vm.db = pouchDB($location.protocol() + '://' + $location.host() + ':' + $location.port() + '/' + couchdbDatabase);
     vm.loggedIn = 'unknown';
     vm.username = undefined;
     vm.login = login;
