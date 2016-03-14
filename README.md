@@ -37,7 +37,7 @@ The app is then available on `http://$(docker-machine ip):5984/configurator/_des
 
 On the first form, an admin user needs to be created. Then values can be filled in for the form. Value of configuration
 `valueName` will be available as the `settings` property of the
-`http://$(docker-machine ip):5984/configurator/valueName` JSON object, when logged in as the admin user.
+`http://$(docker-machine ip):5984/configuration/valueName` JSON object, when logged in as the admin user.
 
 ## How to modify
 

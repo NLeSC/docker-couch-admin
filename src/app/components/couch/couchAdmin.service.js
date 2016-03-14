@@ -12,6 +12,8 @@
     vm.createAdmin = createAdmin;
     vm.checkHasAdmins = checkHasAdmins;
     vm.hasAdmins = undefined;
+    vm.putSecurity = putSecurity;
+    vm.createDatabase = createDatabase;
 
     function createAdmin(username, password) {
       return $http.put('/_config/admins/' + username, '"' + password + '"').then(function(response) {
@@ -22,6 +24,40 @@
         vm.hasAdmins = true;
         return response;
       });
+    }
+
+    function createDatabase(database, securityObject) {
+      var url = '/' + database;
+      return $http.get(url + '/_security')
+        .then(function(response) {
+            // open access
+            return (
+              !!securityObject && (
+                angular.equals({}, response.data) || (
+                  response.data.members.names.length === 0 &&
+                  response.data.members.roles.length === 0)));
+          }, function(response) {
+            // database does not exist
+            if (response.status === 404) {
+              return $http.put(url)
+                .then(function() { return !!securityObject; });
+            } else {
+              return $q.reject(response);
+            }
+          })
+        .then(function(isPublic) {
+          if (isPublic) {
+            return putSecurity(database, securityObject);
+          }
+        });
+    }
+
+    function putSecurity(database, securityObject) {
+      var sec = angular.merge({
+        admins: {names: [], roles: []},
+        members: {names: [], roles: []}
+      }, securityObject);
+      return $http.put('/' + database + '/_security', sec);
     }
 
     function checkHasAdmins() {

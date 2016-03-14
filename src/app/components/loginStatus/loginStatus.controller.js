@@ -44,9 +44,21 @@
           .then(function () { $location.path('/'); });
       }
       function createAndLogin() {
-        return CouchAdminService.createAdmin(vm.username, vm.password)
+        var username = vm.username;
+        return CouchAdminService.createAdmin(username, vm.password)
           .then(function() { vm.hasAdmins = 'yes'; })
-          .then(vm.login);
+          .then(vm.login)
+          .then(createDatabase(couchdbDatabase, username));
+      }
+
+      function createDatabase(db, username) {
+        return function() {
+          var sec = {
+            admins: {names: [username]},
+            members: {names: [username], roles: ['configurator']}
+          };
+          return CouchAdminService.createDatabase(db, sec);
+        };
       }
 
       function activate() {
