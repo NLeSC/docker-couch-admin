@@ -11,8 +11,8 @@
       restrict: 'E',
       templateUrl: 'app/components/configForm/configForm.html',
       scope: {
-          form: '=cfForm',
-          schema: '=cfSchema'
+          form: '@',
+          schema: '@'
       },
       controller: ConfigDirectiveController,
       controllerAs: 'vm',
@@ -22,7 +22,7 @@
     return directive;
 
     /** @ngInject */
-    function ConfigDirectiveController(ConfigFormService, CouchService) {
+    function ConfigDirectiveController($q, ConfigFormService, CouchService) {
       var vm = this;
 
       vm.formData = [];
@@ -43,15 +43,17 @@
 
       function saveDocs() {
         var docs = [];
-        Object.keys(vm.model).map(function(key) {
+        Object.keys(vm.model).forEach(function(key) {
           if (!angular.equals(vm.model[key], vm.originalData[key])) {
-            var doc = {};
-            angular.extend(doc, vm.metadata[key]);
-            doc.settings = vm.model[key];
+            var doc = angular.extend({settings: vm.model[key]}, vm.metadata[key]);
             docs.push(doc);
           }
         });
-        return CouchService.bulkDocs(docs)
+        console.log(docs);
+        console.log(vm.metadata);
+        console.log(vm.model);
+        console.log(vm.originalData);
+        return CouchService.bulkPut(docs)
           .then(function(response) {
             var faulty = [];
             for (var i = 0; i < docs.length; i++) {
@@ -77,13 +79,11 @@
           vm.schemaData = data;
           return ConfigFormService.getDatabaseEntries(vm.schemaData)
             .then(function(entries) {
-              entry.forEach(function(key) {
-                vm.model[key] = data[key].settings;
-                vm.originalData[key] = angular.copy(data[key].settings);
-                vm.metadata[key] = data[key].metadata;
-                if (!vm.metadata[key].hasOwnProperty('_id')) {
-                  vm.metadata[key]._id = key;
-                }
+              entries.forEach(function(entry) {
+                var key = entry.metadata._id;
+                vm.originalData[key] = angular.copy(entry.settings);
+                vm.model[key] = entry.settings;
+                vm.metadata[key] = entry.metadata;
               });
             });
         });

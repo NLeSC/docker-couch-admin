@@ -31,7 +31,6 @@
           // if we're not logged-in to the web service, redirect to login page
           if (rejection.status === 401 && $location.path() != '/login') {
             CouchService.reset();
-            $location.path('/login');
             return rejection;
           }
           return $q.reject(rejection);

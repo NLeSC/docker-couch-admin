@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('simCityAdmin', ['ngMessages', 'ngResource', 'ngNewRouter', 'ui.bootstrap', 'pouchdb', 'schemaForm']);
+    .module('simCityAdmin', ['ngNewRouter', 'pouchdb', 'schemaForm']);
 
 })();

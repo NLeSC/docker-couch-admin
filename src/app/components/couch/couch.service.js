@@ -53,6 +53,7 @@
     function reset() {
       vm.username = '';
       vm.loggedIn = 'no';
+      $location.path('/login');
     }
 
     function getUsername() {
@@ -86,9 +87,7 @@
             vm.username = res.userCtx.name;
             vm.loggedIn = 'yes';
           } else {
-            vm.username = '';
-            vm.loggedIn = 'no';
-            $location.path('/login');
+            vm.reset();
           }
         });
     }

@@ -6,7 +6,12 @@
     .service('ConfigFormService', ConfigFormService);
 
     /** @ngInject */
-    function ConfigFormService($resource, $q, CouchService) {
+    function ConfigFormService($http, $q, CouchService) {
+      var vm = this;
+
+      vm.getObject = getObject;
+      vm.getDatabaseEntries = getDatabaseEntries;
+
       function getDatabaseEntries(schema) {
         var ids = Object.keys(schema.properties);
 
@@ -18,9 +23,9 @@
           });
       }
 
-      function ignoreNotFound(err) {
+      function ignoreNotFound(doc) {
         if (doc.error) {
-          return {};
+          return {_id: doc.key};
         }
         if (doc.doc.deleted) {
           delete doc.doc.deleted;
@@ -30,7 +35,7 @@
 
       function separateSettingsAndMetadata(data) {
         var separatedData = {
-          settings: data.settings || {},
+          settings: data.settings,
           metadata: data
         };
         delete separatedData.metadata.settings;
@@ -41,7 +46,7 @@
         if (typeof obj === 'object') {
           return $q.when(obj);
         } else {
-          return $resource(obj).get();
+          return $http.get(obj).then(function(response) { return response.data; });
         }
       }
     }

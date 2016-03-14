@@ -13,6 +13,7 @@ var gutil = require('gulp-util');
  */
 exports.paths = {
   src: 'src',
+  data: 'data',
   couchapp: 'couchapp',
   distBase: 'dist',
   dist: 'dist/_attachments',
