@@ -21,7 +21,7 @@
     return directive;
 
     /** @ngInject */
-    function LoginDirectiveController(CouchService, CouchAdminService, $location, couchdbDatabase) {
+    function LoginDirectiveController(CouchService, CouchAdminService, $location, couchdbDatabase, toastr) {
       var vm = this;
 
       // "vm.creation" is avaible by directive option "bindToController: true"
@@ -41,7 +41,8 @@
       function login() {
         return CouchService.login(vm.username, vm.password)
           .finally(function() { vm.password = ''; })
-          .then(function () { $location.path('/'); });
+          .then(function () { $location.path('/'); })
+          .then(null, function() { toastr.error("Authentication error."); });
       }
       function createAndLogin() {
         var username = vm.username;

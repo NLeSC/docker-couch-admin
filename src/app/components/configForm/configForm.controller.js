@@ -22,7 +22,7 @@
     return directive;
 
     /** @ngInject */
-    function ConfigDirectiveController($q, ConfigFormService, CouchService) {
+    function ConfigDirectiveController($q, ConfigFormService, CouchService, toastr) {
       var vm = this;
 
       vm.formData = [];
@@ -44,27 +44,37 @@
       function saveDocs() {
         var docs = [];
         Object.keys(vm.model).forEach(function(key) {
-          if (!angular.equals(vm.model[key], vm.originalData[key])) {
+          if (!angular.equals(vm.model[key], vm.originalData[key]) &&
+              !(vm.model[key] === '' &&
+                typeof vm.originalData[key] === 'undefined')) {
             var doc = angular.extend({settings: vm.model[key]}, vm.metadata[key]);
             docs.push(doc);
           }
         });
-        return CouchService.bulkPut(docs)
-          .then(function(response) {
-            var faulty = [];
-            for (var i = 0; i < docs.length; i++) {
-              if (response[i].ok) {
-                var key = response[i].id;
-                vm.metadata[key]._rev = response[i].rev;
-                vm.originalData[key] = angular.copy(docs[i].settings);
-              } else {
-                faulty.push(response[i]);
+        if (docs.length > 0) {
+          return CouchService.bulkPut(docs)
+            .then(function(response) {
+              var faulty = [];
+              for (var i = 0; i < docs.length; i++) {
+                if (response[i].ok) {
+                  var key = response[i].id;
+                  vm.metadata[key]._rev = response[i].rev;
+                  vm.originalData[key] = angular.copy(docs[i].settings);
+                } else {
+                  faulty.push(response[i]);
+                }
               }
-            }
-            if (faulty.length > 0) {
-              return $q.reject(faulty);
-            }
-          });
+              if (faulty.length > 0) {
+                return $q.reject(faulty);
+              }
+            }).then(function() {
+              toastr.success('Updated configuration');
+            }, function() {
+              toastr.error('Failed to update configuration');
+            });
+        } else {
+          toastr.info('No updates needed.');
+        }
       }
 
       function activate() {
@@ -77,10 +87,14 @@
             .then(function(entries) {
               entries.forEach(function(entry) {
                 var key = entry.metadata._id;
-                vm.originalData[key] = angular.copy(entry.settings);
-                vm.model[key] = entry.settings;
+                vm.originalData[key] = entry.settings;
+                if (entry.hasOwnProperty('settings')) {
+                  vm.model[key] = angular.copy(entry.settings);
+                }
                 vm.metadata[key] = entry.metadata;
               });
+            }).then(null, function(){
+              toastr.error('Failed to load configuration from database. Reload.', 'Load error');
             });
         });
       }

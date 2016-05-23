@@ -1,9 +1,101 @@
 [
   {
-    "name": "couchdbPassword",
-    "type": "password"
+    "type": "tabs",
+    "tabs": [
+      {
+        "type": "fieldset",
+        "title": "CouchDB task-database",
+        "description": "The CouchDB database that stores task objects.",
+        "items": [
+          {
+            "key": "task-db.public-url",
+            "type": "url",
+            "validationMessage": "The address should be a proper URL (with http or https)"
+          },
+          {
+            "key": "task-db.url",
+            "type": "url",
+            "description": "CouchDB locally accessible URL. By default it uses hostname ${COUCHDB_HOST} for a docker container.",
+            "placeholder": "http://${COUCHDB_HOST}",
+            "validationMessage": "The address should be a proper URL (with http or https)"
+          },
+          {
+            "key": "task-db.database"
+          },
+          {
+            "key": "task-db.admin"
+          },
+          {
+            "key": "task-db.password",
+            "type": "password"
+          }
+        ]
+      },
+      {
+        "type": "fieldset",
+        "title": "CouchDB job-database",
+        "description": "The CouchDB database that stores job objects.",
+        "items": [
+          {
+            "key": "job-db.public-url",
+            "type": "url"
+          },
+          {
+            "key": "job-db.url",
+            "type": "url"
+          },
+          "job-db.database",
+          "job-db.admin",
+          {
+            "key": "job-db.password",
+            "type": "password"
+          }
+        ]
+      }
+    ]
   },
-  "*",
+  {
+    "type": "fieldset",
+    "title": "WebDAV",
+    "items": [
+      {
+        "key": "webdav.url",
+        "type": "url"
+      },
+      "webdav.user",
+      {
+        "key": "webdav.password",
+        "type": "password"
+      }
+    ]
+  },
+  {
+    "type": "fieldset",
+    "title": "SSH",
+    "items": [
+      {
+        "key": "sshKeyPair.publicKey",
+        "title": "OpenSSH public key, paste in to target host's `~/.ssh/authorized_keys`.",
+        "type": "textarea",
+        "readonly": true
+      },
+      {
+        "key": "ssh.config",
+        "type": "textarea",
+        "placeholder": "SSH config file contents"
+      },
+      {
+        "key": "ssh.knownhosts",
+        "type": "textarea",
+        "placeholder": "SSH known hosts file contents"
+      }
+    ]
+  },
+  {
+    "key": "xenonHosts",
+    "title": "{{ value.host || 'Host '+$index }}",
+    "type": "tabarray"
+  },
   {
     "type": "submit",
     "title": "OK"

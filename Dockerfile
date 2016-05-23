@@ -11,9 +11,13 @@ RUN chown -R couchdb:couchdb /usr/src/couchapp
 ADD run.sh /configurator_entrypoint.sh
 RUN chmod +x /configurator_entrypoint.sh
 ENV DB http://localhost:5984/configurator
+ENV CONFDB http://localhost:5984/configuration
 
-ONBUILD ADD data/schema.json /usr/src/couchapp/_attachments
-ONBUILD ADD data/form.json /usr/src/couchapp/_attachments
+ADD data/configForm/schema.json /usr/src/couchapp/_attachments/configForm
+ADD data/configForm/form.json /usr/src/couchapp/_attachments/configForm
+
+ONBUILD ADD data/configForm/schema.json /usr/src/couchapp/_attachments/configForm
+ONBUILD ADD data/configForm/form.json /usr/src/couchapp/_attachments/configForm
 
 WORKDIR /var/lib/couchdb
 ENTRYPOINT ["/configurator_entrypoint.sh"]

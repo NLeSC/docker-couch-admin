@@ -1,40 +1,106 @@
 {
   "type": "object",
   "properties": {
-    "couchdbUrl": {
-      "title": "Public CouchDB URL",
-      "type": "url"
+    "task-db": {
+      "type": "object",
+      "title": "CouchDB task database",
+      "description": "The settings of the CouchDB database used to store tasks.",
+      "properties": {
+        "url": {
+          "title": "Local url to CouchDB database",
+          "type": "string",
+          "format": "url"
+        },
+        "public-url": {
+          "title": "Public CouchDB URL",
+          "type": "string",
+          "format": "url"
+        },
+        "password": {
+          "title": "CouchDB admin password",
+          "type": "string"
+        },
+        "database": {
+          "title": "CouchDB admin password",
+          "type": "string"
+        },
+        "admin": {
+          "title": "CouchDB admin user",
+          "type": "string"
+        }
+      }
     },
-    "couchdbPassword": {
-      "title": "CouchDB admin password",
-      "type": "string"
+    "job-db": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "title": "Local url to CouchDB database",
+          "type": "string",
+          "format": "url"
+        },
+        "public-url": {
+          "title": "Public CouchDB URL",
+          "type": "string",
+          "format": "url"
+        },
+        "password": {
+          "title": "CouchDB admin password",
+          "type": "string"
+        },
+        "database": {
+          "title": "CouchDB admin password",
+          "type": "string"
+        },
+        "admin": {
+          "title": "CouchDB admin user",
+          "type": "string"
+        }
+      }
     },
-    "couchdbAdmin": {
-      "title": "CouchDB admin user",
-      "type": "string",
-      "default": "admin"
+    "sshKeyPair": {
+      "type": "object",
+      "properties": {
+        "privateKey": {
+          "title": "OpenSSH private key",
+          "type": "string"
+        },
+        "publicKey": {
+          "title": "OpenSSH public key",
+          "type": "string"
+        }
+      }
     },
-    "sshConfig": {
-      "title": "OpenSSH config",
-      "type": "string",
-      "default": ""
+    "ssh": {
+      "type": "object",
+      "properties": {
+        "config": {
+          "title": "OpenSSH config",
+          "type": "string"
+        },
+        "knownhosts": {
+          "title": "OpenSSH known hosts",
+          "description": "Known hosts file",
+          "type": "string"
+        }
+      }
     },
-    "sshKnownHosts": {
-      "title": "OpenSSH known hosts",
-      "type": "string",
-      "default": ""
-    },
-    "webdavUrl": {
-      "title": "WebDAV URL",
-      "type": "url"
-    },
-    "webdavUser": {
-      "title": "WebDAV user",
-      "type": "string"
-    },
-    "webdavPassword": {
-      "title": "WebDAV password",
-      "type": "string"
+    "webdav": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "title": "WebDAV URL",
+          "type": "string",
+          "format": "url"
+        },
+        "user": {
+          "title": "WebDAV user",
+          "type": "string"
+        },
+        "password": {
+          "title": "WebDAV password",
+          "type": "string"
+        }
+      }
     },
     "xenonHosts": {
       "title": "Xenon hosts",
@@ -42,6 +108,11 @@
       "items": {
         "type": "object",
         "properties": {
+          "host": {
+            "title": "Host (including scheme)",
+            "type": "string",
+            "format": "url"
+          },
           "path": {
             "title": "Path of run script",
             "type": "string"
@@ -49,10 +120,6 @@
           "script": {
             "title": "Run script",
             "type": "string"
-          },
-          "host": {
-            "title": "Host (including scheme)",
-            "type": "url"
           },
           "maxTime": {
             "title": "Maximum job time (minutes)",

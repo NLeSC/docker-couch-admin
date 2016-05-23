@@ -34,11 +34,11 @@
       }
 
       function separateSettingsAndMetadata(data) {
-        var separatedData = {
-          settings: data.settings,
-          metadata: data
-        };
-        delete separatedData.metadata.settings;
+        var separatedData = {metadata: data};
+        if (data.hasOwnProperty('settings')) {
+          separatedData.settings = data.settings;
+          delete separatedData.metadata.settings;
+        }
         return separatedData;
       }
 

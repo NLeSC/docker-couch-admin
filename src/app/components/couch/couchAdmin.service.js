@@ -17,7 +17,7 @@
 
     function createAdmin(username, password) {
       return $http.put('/_config/admins/' + username, '"' + password + '"').then(function(response) {
-        // HTTP status code Created
+        // HTTP status code Success
         if (response.status !== 200) {
           return $q.reject(response);
         }
