@@ -1,6 +1,6 @@
 # CouchDB configurator
 
-Configures a webservice using a CouchDB database in a Docker container. Includes a Dockerfile that manages setting up and uploading the couchapp to a CouchDB database.
+Configures a webservice using a CouchDB database in a Docker container. Includes a Dockerfile that manages setting up and uploading the [couchapp](https://couchapp.readthedocs.io/en/latest/) to a CouchDB database. The configuration options are set using [AngularJS schema form](http://schemaform.io).
 
 ## Installation
 
@@ -34,9 +34,7 @@ On the first form, an admin user needs to be created. Then values can be filled 
 
 ## How to modify
 
-Update the `data/configForm/form.json` and `data/configForm/schema.json`, following the specification of
-<http://schemaform.io>. These will contain the values that the CouchDB database needs to store. Run the Docker build
-command again to update the values to be stored.
+Update the `data/configForm/form.json` and `data/configForm/schema.json`, following the specification of <http://schemaform.io>. These will contain the values that the CouchDB database needs to store. Run the Docker build command again to update the values to be stored.
 
 To test this configuration locally, run
 
