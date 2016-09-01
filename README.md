@@ -1,5 +1,7 @@
 # CouchDB configurator
 
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.61301.svg)](http://dx.doi.org/10.5281/zenodo.61301)
+
 Configures a webservice using a CouchDB database in a Docker container. Includes a Dockerfile that manages setting up and uploading the [couchapp](https://couchapp.readthedocs.io/en/latest/) to a CouchDB database. The configuration options are set using [AngularJS schema form](http://schemaform.io).
 
 ## Installation
