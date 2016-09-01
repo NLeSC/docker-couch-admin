@@ -24,7 +24,11 @@ And to run
 docker run --name conf -p 5984:5984 -i nlesc/couchdb-configurator
 ```
 
-The app is then available on `http://$(docker-machine ip):5984/configurator/_design/configurator/index.html`. To make configuration persistent, add a volume `-v /usr/local/var/lib/couchdb`.
+The app is then available on `http://$(docker-machine ip):5984/configurator/_design/configurator/index.html`. To make configuration persistent, even when the process is removed, run
+
+```shell
+docker run --name conf -p 5984:5984 -i -v couchdb-configurator:/usr/local/var/lib/couchdb -v couchdb-configurator-etc:/usr/local/etc/couchdb nlesc/couchdb-configurator
+```
 
 ## How to use
 
