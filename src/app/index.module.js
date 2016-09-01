@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('simCityAdmin', ['ngNewRouter', 'pouchdb', 'schemaForm', 'toastr']);
+    .module('dockerCouchAdmin', ['ngNewRouter', 'pouchdb', 'schemaForm', 'toastr']);
 
 })();

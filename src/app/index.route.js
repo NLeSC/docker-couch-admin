@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('simCityAdmin')
+    .module('dockerCouchAdmin')
     .config(routerConfig)
     .controller('RouterController', RouterController);
 

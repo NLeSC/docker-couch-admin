@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('simCityAdmin')
+    .module('dockerCouchAdmin')
     .directive('cfConfigForm', configForm);
 
   /** @ngInject */

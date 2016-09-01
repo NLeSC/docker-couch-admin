@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('simCityAdmin')
+    .module('dockerCouchAdmin')
     .service('CouchService', CouchService);
 
   /** @ngInject */

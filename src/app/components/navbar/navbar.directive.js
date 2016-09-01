@@ -2,12 +2,12 @@
   'use strict';
 
   angular
-    .module('simCityAdmin')
+    .module('dockerCouchAdmin')
     .directive('acmeNavbar', acmeNavbar);
 
   /** @ngInject */
   function acmeNavbar() {
-    var directive = {
+    return {
       restrict: 'E',
       templateUrl: 'app/components/navbar/navbar.html',
       scope: {
@@ -17,8 +17,6 @@
       controllerAs: 'vm',
       bindToController: true
     };
-
-    return directive;
 
     /** @ngInject */
     function NavbarController(moment) {

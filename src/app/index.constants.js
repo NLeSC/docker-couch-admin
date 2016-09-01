@@ -3,7 +3,7 @@
   'use strict';
 
   angular
-    .module('simCityAdmin')
+    .module('dockerCouchAdmin')
     .constant('moment', moment);
 
 })();

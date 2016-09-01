@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('simCityAdmin')
+    .module('dockerCouchAdmin')
     .constant('couchdbDatabase', 'configuration')
     .config(logConfig)
     .config(pouchDBConfig);

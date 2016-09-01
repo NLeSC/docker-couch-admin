@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('simCityAdmin')
+    .module('dockerCouchAdmin')
     .controller('LoginController', function(){});
 })();
