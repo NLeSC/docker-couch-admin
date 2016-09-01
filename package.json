@@ -1,6 +1,6 @@
 {
-  "name": "simCityAdmin",
-  "version": "0.0.0",
+  "name": "dockerCouchAdmin",
+  "version": "0.1.0",
   "dependencies": {},
   "scripts": {
     "test": "gulp test"
